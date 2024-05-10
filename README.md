@@ -26,7 +26,7 @@ Esta aplicação permite que você realize operações como cadastrar produtos, 
 
 ## Estrutura do Projeto
 
-FuncoesPai: Contém os métodos que são usados para chama.
+FuncoesPai: Contém os métodos comuns que são compartilhados entre Produto e Estoque.
 
 Sistema: Contém a classe Main que inicia o programa e interage com o usuário
 

@@ -33,3 +33,7 @@ Sistema: Contém a classe Main que inicia o programa e interage com o usuário
 Produto: Contém todas as funções relacionadas ao menu principal, onde é possivel cadastrar, consultar e selecionar produtos. Além de ir ao menu estoque.
 
 Estoque: Contém todas as funções relacionadas ao menu estoque, onde é possivel modificar, consultar e zerar o estoque dos produtos.
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License] https://github.com/dev-aguiar/sistema-erp/blob/main/LICENSE.

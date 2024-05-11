@@ -51,7 +51,7 @@ public class Produto extends FuncoesPai {
 
         if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
-            selecionarProduto();
+            return;
         } else {
             Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
             System.out

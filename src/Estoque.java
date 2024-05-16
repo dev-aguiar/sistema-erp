@@ -2,7 +2,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Estoque extends FuncoesPai {
+    private Produto produto;
     Scanner sc = new Scanner(System.in);
+
+    public Estoque(Produto produto) {
+        this.produto = produto;
+    }
 
     public void modificarQuantidadeDoProduto(List<Produto> produtos) {
         System.out.println("\nExibindo os produtos disponíveis para modificar o estoque\n");
@@ -35,6 +40,8 @@ public class Estoque extends FuncoesPai {
 
         Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
         produtoSelecionado.estoqueDoProduto = 0;
+
+        System.out.println("\nO estoque do produto: " + produtoSelecionado.nome + ", da cor " + produtoSelecionado.cor + " e modelo " + produtoSelecionado.modelo + " foi zerado!\n");
     }
 
     public void consultarEstoqueDoProduto(List<Produto> produtos) {
@@ -49,18 +56,12 @@ public class Estoque extends FuncoesPai {
         }
 
         Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
-        System.out.println("\nEstoque modificado com sucesso!\n");
         System.out.println("\nO estoque atual do produto é " + produtoSelecionado.estoqueDoProduto + "\n");
     }
 
     @Override
     void iniciar() {
-        Produto produto = new Produto();
         produto.iniciar();
-    }
-
-    void iniciar(List<Produto> produtos) {
-        menuEstoque(produtos);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Estoque extends FuncoesPai {
                 break;
 
             case 4:
-                iniciar(produtos);
+                iniciar();
                 break;
 
             default:

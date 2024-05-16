@@ -37,8 +37,8 @@ public class Produto extends FuncoesPai {
         } else {
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produto = produtos.get(i);
-                System.out.println("\nCódigo: " + (i + 1) + ", Nome: " + produto.nome + ", Cor: " + produto.cor
-                        + ", Modelo: " + produto.modelo + "\n");
+                System.out.println("\nCódigo: " + (i + 1) + "\nNome: " + produto.nome + "\nCor: " + produto.cor
+                        + "\nModelo: " + produto.modelo + "\n");
             }
         }
 
@@ -102,8 +102,8 @@ public class Produto extends FuncoesPai {
     }
 
     @Override
-    void menuEstoque(List<Produto> produtos) {
-        Estoque estoque = new Estoque();
+    void menuEstoque(List<Produto> produto) {
+        Estoque estoque = new Estoque(this);
         estoque.menuEstoque(produtos);
     }
 

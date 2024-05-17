@@ -12,6 +12,7 @@ public class Produto extends FuncoesPai {
 
     public void adicionarProduto() {
         Produto novoProduto = new Produto();
+        System.out.print("\nPreencha as informações solicitadas para adicionar novo produto\n");
         System.out.println("\nAdicione o nome do produto:\n");
         nome = sc.next();
         novoProduto.nome = nome;
@@ -29,11 +30,15 @@ public class Produto extends FuncoesPai {
         novoProduto.estoqueDoProduto = estoqueDoProduto;
 
         produtos.add(novoProduto);
+
+        System.out.println("\nO produto: " + nome + ", " + cor + ", " + modelo + " foi adicionado com sucesso!\n");
+
     }
 
     public static void consultarProdutos(List<Produto> produtos) {
         if (produtos.isEmpty()) {
             System.out.println("\nNenhum produto cadastrado ainda.\n");
+            return;
         } else {
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produto = produtos.get(i);
@@ -44,9 +49,10 @@ public class Produto extends FuncoesPai {
 
     }
 
-    public void selecionarProduto() {
+    public void excluirProduto() {
         consultarProdutos(produtos);
-        System.out.println("\nDigite o código do produto que deseja selecionar:\n");
+        System.out.println("\nDigite o código do produto que deseja excluir:\n");
+        
         int posicaoSelecionada = sc.nextInt();
 
         if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
@@ -55,10 +61,10 @@ public class Produto extends FuncoesPai {
         } else {
             Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
             System.out
-                    .println("\nProduto selecionado: " + produtoSelecionado.nome + ", " + produtoSelecionado.cor + ", "
+                    .println("\nProduto excluído: " + produtoSelecionado.nome + ", " + produtoSelecionado.cor + ", "
                             + produtoSelecionado.modelo + "\n");
+            produtos.remove(posicaoSelecionada - 1);
         }
-
     }
 
     public void iniciar() {
@@ -66,39 +72,35 @@ public class Produto extends FuncoesPai {
         System.out.println("\nO que deseja fazer?\n"
                 + "\n1 - Adicionar novo produto\n"
                 + "2 - Consultar meus produtos cadastrados\n"
-                + "3 - Selecionar um produto específico\n"
+                + "3 - Excluir um produto\n"
                 + "4 - Consultar estoque do produto\n");
         System.out.println("Digite sua escolha:\n");
         int escolha = sc.nextInt();
 
         switch (escolha) {
             case 1:
-                System.out.print("\nPreencha as informações solicitadas para adicionar novo produto\n");
                 adicionarProduto();
-                System.out.println(
-                        "\nO produto: " + nome + ", " + cor + ", " + modelo + " foi adicionado com sucesso!\n");
-                iniciar();
                 break;
 
             case 2:
                 consultarProdutos(produtos);
-                iniciar();
                 break;
 
             case 3:
-                selecionarProduto();
-                iniciar();
+                excluirProduto();
                 break;
 
             case 4:
                 menuEstoque(produtos);
-                break;
+                return;
 
             default:
                 System.out.print("Opção inválida! Tente novamente uma opção válida\n");
-                iniciar();
                 break;
         }
+
+        iniciar();
+
     }
 
     @Override

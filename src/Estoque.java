@@ -78,28 +78,27 @@ public class Estoque extends FuncoesPai {
         switch (escolha) {
             case 1:
                 modificarQuantidadeDoProduto(produtos);
-                menuEstoque(produtos);
                 break;
 
             case 2:
                 consultarEstoqueDoProduto(produtos);
-                menuEstoque(produtos);
                 break;
 
             case 3:
                 zerarEstoqueDoProduto(produtos);
-                menuEstoque(produtos);
                 break;
 
             case 4:
                 iniciar();
-                break;
+                return;
 
             default:
                 System.out.print("\nOpção inválida! Tente novamente uma opção válida\n");
-                menuEstoque(produtos);
                 break;
         }
+
+        menuEstoque(produtos);
+
 
     }
 }

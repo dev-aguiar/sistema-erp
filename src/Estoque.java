@@ -1,17 +1,18 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class Estoque extends FuncoesPai {
-    private Produto produto;
-    Scanner sc = new Scanner(System.in);
+public class Estoque {
+    private List<Produto> produtos;
+    private Scanner sc = new Scanner(System.in);
 
-    public Estoque(Produto produto) {
-        this.produto = produto;
+    public Estoque(List<Produto> produtos) {
+        this.produtos = produtos;
     }
+
 
     public void modificarQuantidadeDoProduto(List<Produto> produtos) {
         System.out.println("\nExibindo os produtos disponíveis para modificar o estoque\n");
-        Produto.consultarProdutos(produtos);
+        Produto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja selecionar:\n");
         int posicaoSelecionada = sc.nextInt();
 
@@ -29,7 +30,7 @@ public class Estoque extends FuncoesPai {
 
     public void zerarEstoqueDoProduto(List<Produto> produtos) {
         System.out.println("\nExibindo os produtos disponíveis para zerar o estoque\n");
-        Produto.consultarProdutos(produtos);
+        Produto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja zerar o estoque:\n");
         int posicaoSelecionada = sc.nextInt();
 
@@ -41,12 +42,13 @@ public class Estoque extends FuncoesPai {
         Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
         produtoSelecionado.estoqueDoProduto = 0;
 
-        System.out.println("\nO estoque do produto: " + produtoSelecionado.nome + ", da cor " + produtoSelecionado.cor + " e modelo " + produtoSelecionado.modelo + " foi zerado!\n");
+        System.out.println("\nO estoque do produto: " + produtoSelecionado.nome + ", da cor " + produtoSelecionado.cor
+                + " e modelo " + produtoSelecionado.modelo + " foi zerado!\n");
     }
 
     public void consultarEstoqueDoProduto(List<Produto> produtos) {
         System.out.println("\nExibindo os produtos disponíveis para consultar o estoque\n");
-        Produto.consultarProdutos(produtos);
+        Produto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja consultar o estoque:\n");
         int posicaoSelecionada = sc.nextInt();
 
@@ -59,19 +61,13 @@ public class Estoque extends FuncoesPai {
         System.out.println("\nO estoque atual do produto é " + produtoSelecionado.estoqueDoProduto + "\n");
     }
 
-    @Override
-    void iniciar() {
-        produto.iniciar();
-    }
-
-    @Override
-    void menuEstoque(List<Produto> produtos) {
+    void menuEstoque() {
         System.out.println("\nMenu Estoque:\n"
                 + "\nO que deseja fazer?\n"
                 + "\n1 - Modificar estoque do produto\n"
                 + "2 - Consultar estoque atual do produto\n"
                 + "3 - Zerar estoque do produto\n"
-                + "4 - Voltar ao menu anterior\n");
+                + "4 - Voltar ao menu inicial\n");
         System.out.println("\nDigite sua escolha:\n");
         int escolha = sc.nextInt();
 
@@ -89,7 +85,6 @@ public class Estoque extends FuncoesPai {
                 break;
 
             case 4:
-                iniciar();
                 return;
 
             default:
@@ -97,8 +92,9 @@ public class Estoque extends FuncoesPai {
                 break;
         }
 
-        menuEstoque(produtos);
-
+        menuEstoque();
 
     }
+
+
 }

@@ -2,38 +2,108 @@
 
 Bem-vindo(a) ao meu sistema ERP feito em Java!
 
-Esta aplicação permite que você realize operações como cadastrar produtos, adicionando o nome do produto, cor, modelo e controlar o estoque desses produtos cadastrados.
+O projeto visa fornecer uma solução completa para gerenciar as operações de uma loja, incluindo módulos para gerenciamento de produtos, estoque, clientes e vendas.
 
 
 ### Linguagem utilizada
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
-## Como usar
+## Funcionalidades
 
-1. Cadastrando produtos: Ao iniciar a aplicação selecione a opção 1 e siga as instruções na tela, adicionando o nome do produto, cor, modelo e estoque
+- **Módulo de Produtos**: Adicionar, consultar e excluir produtos.
 
-2. Consultando produtos: Selecionando a opção 2 ou 3 no menu inicial, o usuário consegue ver a lista de todos os produtos cadastrados e selecionar um produto especifico
+- **Módulo de Estoque**: Modificar a quantidade, consultar e zerar o estoque dos produtos.
 
-3. Menu Estoque: Ao selecionar a opção 4, o usuário é levado até o sistema de estoque dos produtos cadastrados.
+- **Módulo de Clientes**: Cadastrar, consultar e selecionar clientes.
 
-4. Modificando o estoque dos produtos: No menu estoque, selecionado a opção 1 ou 3 o usuário consegue selecionar um produto especifico pelo código gerado pelo sistema e modificar ou zerar, respectivamente, o estoque total do produto selecionado
-
-5. Consultando o estoque atual do produto: No menu estoque, selecionado a opção 2 o usuário consegue selecionar um produto e o sistema mostra o estoque total do produto
-
-6. Voltando ao menu principal: Selecionando a opção 4 no menu estoque, o usuário é transportado ao menu principal onde consegue cadastrar e consultar produtos
+- **Módulo de Vendas**: Gerar, consultar e excluir pedidos de venda.
 
 
 ## Estrutura do Projeto
 
-FuncoesPai: Contém os métodos comuns que são compartilhados entre Produto e Estoque.
+O projeto está organizado nas seguintes classes principais:
 
-Sistema: Contém a classe Main que inicia o programa e interage com o usuário
+**Main.java**: Ponto de entrada da aplicação.
 
-Produto: Contém todas as funções relacionadas ao menu principal, onde é possivel cadastrar, consultar e selecionar produtos. Além de ir ao menu estoque.
+**Loja.java**: Classe que gerencia os produtos, clientes e vendas.
 
-Estoque: Contém todas as funções relacionadas ao menu estoque, onde é possivel modificar, consultar e zerar o estoque dos produtos.
+**Inicio.java**: Classe que inicia o sistema e exibe o menu principal.
+
+**Produto.java**: Classe que gerencia as operações relacionadas aos produtos.
+
+**Estoque.java**: Classe que gerencia as operações relacionadas ao estoque dos produtos.
+
+**Cliente.java**: Classe que gerencia as operações relacionadas aos clientes.
+
+**Venda.java**: Classe que gerencia as operações relacionadas às vendas.
+
+
+## Como usar
+
+ - Clone o repositório para sua máquina local:
+
+`git clone https://github.com/dev-aguiar/sistema-erp.git`
+
+`cd erp-java-project`
+
+ - Abra o projeto em sua IDE (Utilizei o VSCode)
+
+ - Compile e execute o projeto a partir da classe `Main.java`.
+
+-------------------------------------------------
+
+Ao iniciar a aplicação, você será apresentado ao menu principal com as seguintes opções:
+
+- **Menu de Produtos**:
+
+_Adicionar novo produto_
+
+_Consultar produtos cadastrados_
+
+_Excluir um produto_
+
+- **Estoque de Produtos**:
+
+_Modificar estoque de um produto existente_
+
+_Consultar estoque atual do produto_
+
+_Zerar estoque do produto_
+
+- **Menu de Clientes**:
+
+_Cadastrar novo cliente_
+
+_Consultar clientes cadastrados_
+
+_Selecionar um cliente_
+
+- **Menu de Vendas**:
+
+_Gerar pedido de venda_
+
+_Consultar pedidos de venda gerados_
+
+_Excluir um pedido de venda_
+
+
 
 ## Licença
 
 Este projeto está licenciado sob a [MIT License] https://github.com/dev-aguiar/sistema-erp/blob/main/LICENSE.
+
+
+## Autores
+
+- [@dev-aguiar](https://www.github.com/dev-aguiar)
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/dev-aguiar)
+
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-green?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/5511975158913)
+
+[![Gmail](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:andre.aguiar522@gmail.com)
+
+

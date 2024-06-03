@@ -1,17 +1,21 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Produto extends FuncoesPai {
+public class Produto {
     String nome;
     String cor;
     String modelo;
+    double valor;
     int estoqueDoProduto;
-    List<Produto> produtos = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
+    private static List<Produto> produtos;
+    static Scanner sc = new Scanner(System.in);
+
+    public Produto(List<Produto> produtos){
+        Produto.produtos = produtos;
+    }
 
     public void adicionarProduto() {
-        Produto novoProduto = new Produto();
+        Produto novoProduto = new Produto(produtos);
         System.out.print("\nPreencha as informações solicitadas para adicionar novo produto\n");
         System.out.println("\nAdicione o nome do produto:\n");
         nome = sc.next();
@@ -25,17 +29,22 @@ public class Produto extends FuncoesPai {
         modelo = sc.next();
         novoProduto.modelo = modelo;
 
+        System.out.println("\nDigite o valor do produto:\n");
+        valor = sc.nextDouble();
+        novoProduto.valor = valor;
+
         System.out.println("\nAdicione a quantidade do produto:\n");
         estoqueDoProduto = sc.nextInt();
         novoProduto.estoqueDoProduto = estoqueDoProduto;
 
         produtos.add(novoProduto);
 
-        System.out.println("\nO produto: " + nome + ", " + cor + ", " + modelo + " foi adicionado com sucesso!\n");
+        System.out.println("\nO produto:\n" + "\nNome: " + nome + "\nCor: " + cor
+                + "\nModelo: " + modelo + "\nValor: " + valor + "\n" + "\nFoi adicionado com sucesso!\n");
 
     }
 
-    public static void consultarProdutos(List<Produto> produtos) {
+    public static void consultarProdutos() {
         if (produtos.isEmpty()) {
             System.out.println("\nNenhum produto cadastrado ainda.\n");
             return;
@@ -43,18 +52,15 @@ public class Produto extends FuncoesPai {
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produto = produtos.get(i);
                 System.out.println("\nCódigo: " + (i + 1) + "\nNome: " + produto.nome + "\nCor: " + produto.cor
-                        + "\nModelo: " + produto.modelo + "\n");
+                        + "\nModelo: " + produto.modelo + "\nValor: " + produto.valor + "\n");
             }
         }
-
     }
 
     public void excluirProduto() {
-        consultarProdutos(produtos);
+        consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja excluir:\n");
-        
         int posicaoSelecionada = sc.nextInt();
-
         if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
             return;
@@ -62,18 +68,18 @@ public class Produto extends FuncoesPai {
             Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
             System.out
                     .println("\nProduto excluído: " + produtoSelecionado.nome + ", " + produtoSelecionado.cor + ", "
-                            + produtoSelecionado.modelo + "\n");
+                            + produtoSelecionado.modelo + produtoSelecionado.valor + "\n");
             produtos.remove(posicaoSelecionada - 1);
         }
     }
 
-    public void iniciar() {
-        System.out.println("\n>>> Bem vindo(a) ao nosso Sistema ERP!\n");
+    void menuProduto() {
+        System.out.println("\n>>> Menu Produtos:\n");
         System.out.println("\nO que deseja fazer?\n"
                 + "\n1 - Adicionar novo produto\n"
                 + "2 - Consultar meus produtos cadastrados\n"
                 + "3 - Excluir um produto\n"
-                + "4 - Consultar estoque do produto\n");
+                + "4 - Voltar ao menu inicial\n");
         System.out.println("Digite sua escolha:\n");
         int escolha = sc.nextInt();
 
@@ -83,7 +89,7 @@ public class Produto extends FuncoesPai {
                 break;
 
             case 2:
-                consultarProdutos(produtos);
+                consultarProdutos();
                 break;
 
             case 3:
@@ -91,7 +97,6 @@ public class Produto extends FuncoesPai {
                 break;
 
             case 4:
-                menuEstoque(produtos);
                 return;
 
             default:
@@ -99,14 +104,8 @@ public class Produto extends FuncoesPai {
                 break;
         }
 
-        iniciar();
+        menuProduto();
 
-    }
-
-    @Override
-    void menuEstoque(List<Produto> produto) {
-        Estoque estoque = new Estoque(this);
-        estoque.menuEstoque(produtos);
     }
 
 }

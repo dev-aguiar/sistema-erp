@@ -1,19 +1,21 @@
 import java.util.Scanner;
 
+import cliente.Cliente;
+import cliente.ListaCliente;
+import estoque.Estoque;
+import produto.ListaProduto;
+import produto.Produto;
+import venda.ListaVenda;
+import venda.Venda;
+
 public class Inicio {
-    private Loja loja;
-    private Produto produto;
-    private Estoque estoque;
-    private Cliente cliente;
-    private Venda venda;
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public Inicio() {
-        this.loja = new Loja();
-        this.produto = new Produto(loja.getProdutos());
-        this.estoque = new Estoque(loja.getProdutos());
-        this.cliente = new Cliente(loja.getClientes());
-        this.venda = new Venda(loja.getVendas(), loja.getProdutos(), loja.getClientes());
+        new Produto(Produto.getNome(), Produto.getCor(), Produto.getModelo(), Produto.getValor(), Produto.getEstoqueDoProduto());
+        new Estoque();
+        new Cliente(Cliente.getNome(), Cliente.getCidade(), Cliente.getTelefone());
+        new Venda(Venda.getCliente(), Venda.getProduto(), Venda.getValorDoPedido());
     }
 
     public void iniciar() {
@@ -28,17 +30,17 @@ public class Inicio {
 
         switch (escolha) {
             case 1:
-                produto.menuProduto();
+                ListaProduto.menuProduto();
                 break;
             case 2:
-                estoque.menuEstoque();
+                Estoque.menuEstoque();
                 break;
             case 3:
-                cliente.menuCliente();
+                ListaCliente.menuCliente();
                 break;
             case 4:
-                venda.menuVenda();
-                return;
+                ListaVenda.menuVenda();
+                break;
             default:
                 System.out.print("Opção inválida! Tente novamente uma opção válida\n");
                 break;

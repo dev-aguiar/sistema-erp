@@ -1,67 +1,65 @@
-import java.util.List;
+package estoque;
+
 import java.util.Scanner;
 
+import produto.ListaProduto;
+import produto.Produto;
+
 public class Estoque {
-    private List<Produto> produtos;
-    private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
-    public Estoque(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
-
-    public void modificarQuantidadeDoProduto(List<Produto> produtos) {
+    public static void modificarQuantidadeDoProduto() {
         System.out.println("\nExibindo os produtos disponíveis para modificar o estoque\n");
-        Produto.consultarProdutos();
+        ListaProduto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja selecionar:\n");
         int posicaoSelecionada = sc.nextInt();
 
-        if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
+        if (posicaoSelecionada < 1 || posicaoSelecionada > ListaProduto.produtoList.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
             return;
         }
 
-        Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
+        ListaProduto.produtoList.get(posicaoSelecionada - 1);
         System.out.println("\nAdicione a quantidade do produto:\n");
         int novoEstoque = sc.nextInt();
-        produtoSelecionado.estoqueDoProduto = novoEstoque;
-        System.out.println("\nO estoque do " + produtoSelecionado.nome + " foi atualizado para " + novoEstoque);
+        Produto.setEstoqueDoProduto(novoEstoque);
+        System.out.println("\nO estoque do " + Produto.getNome() + " foi atualizado para " + novoEstoque);
     }
 
-    public void zerarEstoqueDoProduto(List<Produto> produtos) {
+    public static void zerarEstoqueDoProduto() {
         System.out.println("\nExibindo os produtos disponíveis para zerar o estoque\n");
-        Produto.consultarProdutos();
+        ListaProduto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja zerar o estoque:\n");
         int posicaoSelecionada = sc.nextInt();
 
-        if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
+        if (posicaoSelecionada < 1 || posicaoSelecionada > ListaProduto.produtoList.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
             return;
         }
 
-        Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
-        produtoSelecionado.estoqueDoProduto = 0;
+        ListaProduto.produtoList.get(posicaoSelecionada - 1);
+        Produto.setEstoqueDoProduto(0);
 
-        System.out.println("\nO estoque do produto: " + produtoSelecionado.nome + ", da cor " + produtoSelecionado.cor
-                + " e modelo " + produtoSelecionado.modelo + " foi zerado!\n");
+        System.out.println("\nO estoque do produto: " + Produto.getNome() + ", da cor " + Produto.getCor()
+                + " e modelo " + Produto.getModelo() + " foi zerado!\n");
     }
 
-    public void consultarEstoqueDoProduto(List<Produto> produtos) {
+    public static void consultarEstoqueDoProduto() {
         System.out.println("\nExibindo os produtos disponíveis para consultar o estoque\n");
-        Produto.consultarProdutos();
+        ListaProduto.consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja consultar o estoque:\n");
         int posicaoSelecionada = sc.nextInt();
 
-        if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
+        if (posicaoSelecionada < 1 || posicaoSelecionada > ListaProduto.produtoList.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
             return;
         }
 
-        Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
-        System.out.println("\nO estoque atual do produto é " + produtoSelecionado.estoqueDoProduto + "\n");
+        ListaProduto.produtoList.get(posicaoSelecionada - 1);
+        System.out.println("\nO estoque atual do produto é " + Produto.getEstoqueDoProduto() + "\n");
     }
 
-    void menuEstoque() {
+    public static void menuEstoque() {
         System.out.println("\nMenu Estoque:\n"
                 + "\nO que deseja fazer?\n"
                 + "\n1 - Modificar estoque do produto\n"
@@ -73,15 +71,15 @@ public class Estoque {
 
         switch (escolha) {
             case 1:
-                modificarQuantidadeDoProduto(produtos);
+                modificarQuantidadeDoProduto();
                 break;
 
             case 2:
-                consultarEstoqueDoProduto(produtos);
+                consultarEstoqueDoProduto();
                 break;
 
             case 3:
-                zerarEstoqueDoProduto(produtos);
+                zerarEstoqueDoProduto();
                 break;
 
             case 4:
@@ -95,6 +93,5 @@ public class Estoque {
         menuEstoque();
 
     }
-
 
 }

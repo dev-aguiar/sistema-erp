@@ -1,43 +1,32 @@
+package produto;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Produto {
-    String nome;
-    String cor;
-    String modelo;
-    double valor;
-    int estoqueDoProduto;
-    private static List<Produto> produtos;
-    static Scanner sc = new Scanner(System.in);
+public class ListaProduto {
 
-    public Produto(List<Produto> produtos){
-        Produto.produtos = produtos;
-    }
+    public static List<Produto> produtoList = new ArrayList<>();
+    private static Scanner sc = new Scanner(System.in);
 
-    public void adicionarProduto() {
-        Produto novoProduto = new Produto(produtos);
+    public static void adicionarProduto(String nome, String cor, String modelo, double valor, int estoqueDoProduto) {
         System.out.print("\nPreencha as informações solicitadas para adicionar novo produto\n");
         System.out.println("\nAdicione o nome do produto:\n");
         nome = sc.next();
-        novoProduto.nome = nome;
 
         System.out.println("\nAdicione a cor do produto:\n");
         cor = sc.next();
-        novoProduto.cor = cor;
 
         System.out.println("\nAdicione o modelo do produto:\n");
         modelo = sc.next();
-        novoProduto.modelo = modelo;
 
         System.out.println("\nDigite o valor do produto:\n");
         valor = sc.nextDouble();
-        novoProduto.valor = valor;
 
         System.out.println("\nAdicione a quantidade do produto:\n");
         estoqueDoProduto = sc.nextInt();
-        novoProduto.estoqueDoProduto = estoqueDoProduto;
 
-        produtos.add(novoProduto);
+        produtoList.add(new Produto(nome, cor, modelo, valor, estoqueDoProduto));
 
         System.out.println("\nO produto:\n" + "\nNome: " + nome + "\nCor: " + cor
                 + "\nModelo: " + modelo + "\nValor: " + valor + "\n" + "\nFoi adicionado com sucesso!\n");
@@ -45,35 +34,35 @@ public class Produto {
     }
 
     public static void consultarProdutos() {
-        if (produtos.isEmpty()) {
+        if (produtoList.isEmpty()) {
             System.out.println("\nNenhum produto cadastrado ainda.\n");
             return;
         } else {
-            for (int i = 0; i < produtos.size(); i++) {
-                Produto produto = produtos.get(i);
-                System.out.println("\nCódigo: " + (i + 1) + "\nNome: " + produto.nome + "\nCor: " + produto.cor
-                        + "\nModelo: " + produto.modelo + "\nValor: " + produto.valor + "\n");
+            for (int i = 0; i < produtoList.size(); i++) {
+                produtoList.get(i);
+                System.out.println("\nCódigo: " + (i + 1) + "\nNome: " + Produto.getNome() + "\nCor: " + Produto.getCor()
+                        + "\nModelo: " + Produto.getModelo() + "\nValor: " + Produto.getValor() + "\n");
             }
         }
     }
 
-    public void excluirProduto() {
+    public static void excluirProduto() {
         consultarProdutos();
         System.out.println("\nDigite o código do produto que deseja excluir:\n");
         int posicaoSelecionada = sc.nextInt();
-        if (posicaoSelecionada < 1 || posicaoSelecionada > produtos.size()) {
+        if (posicaoSelecionada < 1 || posicaoSelecionada > produtoList.size()) {
             System.out.println("\nCódigo inválido. Tente novamente.\n");
             return;
         } else {
-            Produto produtoSelecionado = produtos.get(posicaoSelecionada - 1);
+            Produto produtoSelecionado = produtoList.get(posicaoSelecionada - 1);
             System.out
-                    .println("\nProduto excluído: " + produtoSelecionado.nome + ", " + produtoSelecionado.cor + ", "
-                            + produtoSelecionado.modelo + produtoSelecionado.valor + "\n");
-            produtos.remove(posicaoSelecionada - 1);
+                    .println("\nProduto excluído: " + Produto.getNome() + ", " + Produto.getCor() + ", "
+                            + Produto.getModelo() + Produto.getValor() + "\n");
+            produtoList.remove(produtoSelecionado);
         }
     }
 
-    void menuProduto() {
+    public static void menuProduto() {
         System.out.println("\n>>> Menu Produtos:\n");
         System.out.println("\nO que deseja fazer?\n"
                 + "\n1 - Adicionar novo produto\n"
@@ -85,7 +74,7 @@ public class Produto {
 
         switch (escolha) {
             case 1:
-                adicionarProduto();
+                adicionarProduto(Produto.getNome(), Produto.getCor(), Produto.getModelo(), Produto.getValor(), Produto.getEstoqueDoProduto());
                 break;
 
             case 2:

@@ -1,67 +1,62 @@
+package cliente;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cliente {
-    String nome;
-    String cidade;
-    Long telefone;
-    private List<Cliente> clientes;
+public class ListaCliente {
+
+    public static List<Cliente> clienteList = new ArrayList<>();
+
     static Scanner sc = new Scanner(System.in);
+    
 
-    public Cliente(List<Cliente> clientes){
-        this.clientes = clientes;
-    }
-
-    void cadastrarCliente() {
-        Cliente novoCliente = new Cliente(clientes);
+    static void cadastrarCliente(String nome, String cidade, Long telefone) {
         System.out.println("\nDigite o nome completo do cliente:\n");
         nome = sc.next();
-        novoCliente.nome = nome;
 
         System.out.println("\nDigite a cidade do cliente:\n");
         cidade = sc.next();
-        novoCliente.cidade = cidade;
 
         System.out.println("\nInsira o telefone do cliente com o DDD:\n");
         System.out.println("\nExemplo: 11912345678\n");
         telefone = sc.nextLong();
-        novoCliente.telefone = telefone;
 
-        clientes.add(novoCliente);
+        clienteList.add(new Cliente(nome, cidade, telefone));
 
-        System.out.println("\nUm novo cliente foi adicionado: " + novoCliente.nome + ", " + novoCliente.telefone
-                + " anos, de " + novoCliente.cidade + "\n");
+        System.out.println("\nUm novo cliente foi adicionado: " + nome + ", " + telefone
+                + " anos, de " + cidade + "\n");
     }
 
-    static void consultarCliente(List<Cliente> clientes) {
-        if (clientes.isEmpty()) {
+    public static void consultarCliente() {
+        if (clienteList.isEmpty()) {
             System.out.println("\nNenhum cliente foi adicionado ainda!\n");
         } else {
             System.out.println("\nExibindo todos os clientes cadastrados:\n");
-            for (int i = 0; i < clientes.size(); i++) {
-                Cliente cliente = clientes.get(i);
+            for (int i = 0; i < clienteList.size(); i++) {
+                clienteList.get(i);
                 System.out.println("\nCódigo do Cliente: " + (i + 1)
-                        + "\nNome: " + cliente.nome
-                        + "\nCidade: " + cliente.cidade
-                        + "\nTelefone: " + cliente.telefone + "\n");
+                        + "\nNome: " + Cliente.getNome()
+                        + "\nCidade: " + Cliente.getCidade()
+                        + "\nTelefone: " + Cliente.getTelefone() + "\n");
             }
         }
     }
 
-    void selecionarCliente() {
-        consultarCliente(clientes);
+    static void selecionarCliente() {
+        consultarCliente();
         int codigoSelecionado = sc.nextInt();
-        if (codigoSelecionado < 1 || codigoSelecionado > clientes.size()) {
+        if (codigoSelecionado < 1 || codigoSelecionado > clienteList.size()) {
             System.out.println("\nCódigo do cliente inválido. Tente novamente\n");
             return;
         } else {
-            Cliente clienteSelecionado = clientes.get(codigoSelecionado - 1);
-            System.out.println("\nCliente selecionado: " + clienteSelecionado.nome + "\nTelefone:" + clienteSelecionado.telefone
-                    + "\nCidade:" + clienteSelecionado.cidade + "\n");
+            clienteList.get(codigoSelecionado - 1);
+            System.out.println(
+                    "\nCliente selecionado: " + Cliente.getNome() + "\nTelefone:" + Cliente.getTelefone()
+                            + "\nCidade:" + Cliente.getCidade() + "\n");
         }
     }
 
-    void menuCliente() {
+    public static void menuCliente() {
         System.out.println("\nMenu Cliente:\n"
                 + "\nO que deseja fazer?\n"
                 + "\n1 - Cadastrar novo cliente\n"
@@ -73,11 +68,11 @@ public class Cliente {
 
         switch (escolha) {
             case 1:
-                cadastrarCliente();
+                cadastrarCliente(null, null, null);
                 break;
 
             case 2:
-                consultarCliente(clientes);
+                consultarCliente();
                 break;
 
             case 3:
